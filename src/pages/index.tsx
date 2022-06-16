@@ -15,7 +15,22 @@ const Home: NextPage = () => {
         }
       />
 
-      <Lista />
+      <Lista 
+        pets={[
+          {
+            id: 1,
+            name: 'Lilica',
+            historia:'Uma cachorrinha muito levada',
+            foto:'https://saude.abril.com.br/wp-content/uploads/2018/12/cachorro-livro.png'
+          },
+          {
+            id: 2,
+            name: 'Boomer',
+            historia:'Um cachorro esperto mas arteiro',
+            foto:'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png'
+          }
+        ]}
+      />
     </div>
   );
 };

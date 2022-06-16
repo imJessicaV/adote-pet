@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { Pet } from "../../../data/@types/Pet";
 import {
   ListaStyled,
   Descricao,
@@ -7,29 +8,30 @@ import {
   ItemLista,
   Nome,
 } from "./Lista.style";
+import { TextService } from '../../../data/services/TextService'; 
 
-export default function Lista() {
+interface ListaProps {
+  pets: Pet[];
+}
+
+export default function Lista(props: ListaProps) {
+    const tamanhoMaximoTexto = 200;
   return (
     <ListaStyled>
-      <ItemLista>
-        <Foto
-          src={
-            "https://conteudo.imguol.com.br/c/entretenimento/54/2020/04/28/cachorro-pug-1588098472110_v2_1x1.jpg"
-          }
-        />
-        <Informacoes>
-          <Nome>Boomer</Nome>
-          <Descricao>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis
-            quidem necessitatibus ratione, veritatis quas delectus alias quasi
-            possimus placeat vitae illum impedit deserunt, ullam ipsum
-            voluptatum modi, ex veniam sint!
-          </Descricao>
-          <Button variant={"contained"} fullWidth>
-            Adotar
-          </Button>
-        </Informacoes>
-      </ItemLista>
+      {props.pets.map((pet) => (
+        <ItemLista key={pet.id}>
+          <Foto src={pet.foto} alt={pet.name} />
+          <Informacoes>
+            <Nome>{pet.name}</Nome>
+            <Descricao>
+              {TextService.limitarTexto(pet.historia, tamanhoMaximoTexto)}
+            </Descricao>
+            <Button variant={"contained"} fullWidth>
+              Adotar{pet.name}
+            </Button>
+          </Informacoes>
+        </ItemLista>
+      ))}
     </ListaStyled>
   );
 }
